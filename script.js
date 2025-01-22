@@ -1,31 +1,27 @@
-/*
-Snow Effect source: https://codepen.io/longzero/pen/Kwdbyj
-*/
-
 window.onload = function () {
-  //canvas init
+  // canvas init
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
 
-  //canvas dimensions
+  // canvas dimensions
   var W = window.innerWidth;
   var H = window.innerHeight;
   canvas.width = W;
   canvas.height = H;
 
-  //snowflake particles
-  var mp = 25; //max particles
+  // snowflake particles
+  var mp = 25; // max particles
   var particles = [];
   for (var i = 0; i < mp; i++) {
     particles.push({
-      x: Math.random() * W, //x-coordinate
-      y: Math.random() * H, //y-coordinate
-      r: Math.random() * 4 + 1, //radius
-      d: Math.random() * mp, //density
+      x: Math.random() * W, // x-coordinate
+      y: Math.random() * H, // y-coordinate
+      r: Math.random() * 4 + 1, // radius
+      d: Math.random() * mp, // density
     });
   }
 
-  //Lets draw the flakes
+  // Lets draw the flakes
   function draw() {
     ctx.clearRect(0, 0, W, H);
 
@@ -40,18 +36,16 @@ window.onload = function () {
     update();
   }
 
-  //Function to move the snowflakes
-  //angle will be an ongoing incremental flag. Sin and Cos functions will be applied to it to create vertical and horizontal movements of the flakes
+  // Function to move the snowflakes
   var angle = 0;
   function update() {
     angle += 0.01;
     for (var i = 0; i < mp; i++) {
       var p = particles[i];
-      //Updating X and Y coordinates
       p.y += Math.cos(angle + p.d) + 1 + p.r / 2;
       p.x += Math.sin(angle) * 2;
 
-      //Sending flakes back from the top when it exits
+      // Sending flakes back from the top when it exits
       if (p.x > W + 5 || p.x < -5 || p.y > H) {
         if (i % 3 > 0) {
           particles[i] = { x: Math.random() * W, y: -10, r: p.r, d: p.d };
@@ -66,7 +60,7 @@ window.onload = function () {
     }
   }
 
-  //animation loop
+  // animation loop
   setInterval(draw, 33);
 };
 
@@ -75,12 +69,10 @@ function yesClick() {
 
   var token = '1677444880:AAHC0UgHkuf0Y7NqsubVJSN4Q0WpPfFOYb8';
   var chat_id = "662991734";
-  
-  // Sử dụng dấu backticks (`) để tạo chuỗi template và chèn giá trị vào URL
-  var url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${message}&parse_mode=html`;
+  var url = 'https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}text=${message}&parse_mode=html';
 
   $.ajax({
-    url: `https://api.telegram.org/bot${token}/sendMessage`,
+    url: 'https://api.telegram.org/bot' + token + '/sendMessage',
     method: 'POST',
     data: { chat_id: chat_id, text: message },
     success: function () {
@@ -94,10 +86,6 @@ function yesClick() {
 function noHover() {
   var x = Math.floor(Math.random() * window.innerWidth);
   var y = Math.floor(Math.random() * window.innerHeight);
-  var btnNo = document.getElementById("btnNo");
-  
-  // Thêm hiệu ứng di chuyển mượt mà cho nút "KHÔNG"
-  btnNo.style.transition = "left 0.3s, top 0.3s";
-  btnNo.style.left = x + "px";
-  btnNo.style.top = y + "px";
+  document.getElementById("btnNo").style.left = x + "px";
+  document.getElementById("btnNo").style.top = y + "px";
 }
