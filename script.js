@@ -48,25 +48,17 @@ window.onload = function () {
     for (var i = 0; i < mp; i++) {
       var p = particles[i];
       //Updating X and Y coordinates
-      //We will add 1 to the cos function to prevent negative values which will lead flakes to move upwards
-      //Every particle has its own density which can be used to make the downward movement different for each flake
-      //Lets make it more random by adding in the radius
       p.y += Math.cos(angle + p.d) + 1 + p.r / 2;
       p.x += Math.sin(angle) * 2;
 
       //Sending flakes back from the top when it exits
-      //Lets make it a bit more organic and let flakes enter from the left and right also.
       if (p.x > W + 5 || p.x < -5 || p.y > H) {
         if (i % 3 > 0) {
-          //66.67% of the flakes
           particles[i] = { x: Math.random() * W, y: -10, r: p.r, d: p.d };
         } else {
-          //If the flake is exitting from the right
           if (Math.sin(angle) > 0) {
-            //Enter from the left
             particles[i] = { x: -5, y: Math.random() * H, r: p.r, d: p.d };
           } else {
-            //Enter from the right
             particles[i] = { x: W + 5, y: Math.random() * H, r: p.r, d: p.d };
           }
         }
@@ -79,29 +71,33 @@ window.onload = function () {
 };
 
 function yesClick() {
-
   var message = "Bạn gái đã đồng ý đi chơi";
-  
+
   var token = '1677444880:AAHC0UgHkuf0Y7NqsubVJSN4Q0WpPfFOYb8';
-  var chat_id = "662991734";;
-  var url = 'https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}text=${message}&parse_mode=html';
+  var chat_id = "662991734";
   
+  // Sử dụng dấu backticks (`) để tạo chuỗi template và chèn giá trị vào URL
+  var url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${message}&parse_mode=html`;
+
   $.ajax({
-    url:'https://api.telegram.org/bot'+token+'/sendMessage',
-    method:'POST',
-    data:{chat_id:chat_id,text:message},
-    success:function(){
-     // alert('your message has been sent!');
+    url: `https://api.telegram.org/bot${token}/sendMessage`,
+    method: 'POST',
+    data: { chat_id: chat_id, text: message },
+    success: function () {
+      // alert('your message has been sent!');
     }
   });
 
   alert("Phương đã nhận được câu trả lời, tối thứ 6 chơi em nhé!");
-
 }
 
 function noHover() {
   var x = Math.floor(Math.random() * window.innerWidth);
   var y = Math.floor(Math.random() * window.innerHeight);
-  document.getElementById("btnNo").style.left = x + "px";
-  document.getElementById("btnNo").style.top = y + "px";
+  var btnNo = document.getElementById("btnNo");
+  
+  // Thêm hiệu ứng di chuyển mượt mà cho nút "KHÔNG"
+  btnNo.style.transition = "left 0.3s, top 0.3s";
+  btnNo.style.left = x + "px";
+  btnNo.style.top = y + "px";
 }
