@@ -80,7 +80,7 @@ window.onload = function () {
 
 function yesClick() {
 
-  var message = "Phuong Nhi đã đồng ý đi chơi";
+  var message = "Bạn gái đã đồng ý đi chơi";
   
   var token = '1677444880:AAHC0UgHkuf0Y7NqsubVJSN4Q0WpPfFOYb8';
   var chat_id = "662991734";;
@@ -95,7 +95,7 @@ function yesClick() {
     }
   });
 
-  alert("A.Phương đã nhận được câu trả lời, Cuối tuần đi chơi em nhé!");
+  alert("Phương đã nhận được câu trả lời, tối thứ 6 chơi em nhé!");
 
 }
 
